@@ -677,9 +677,19 @@ function render(candidates){
   document.getElementById('sv-ir').textContent  =cnt('in review');
   document.getElementById('sv-nsel').textContent=cnt('not selected');
 
-  /* set explicit row count so all rows fill the container height */
+  /* smart row sizing: fill height when many candidates, cap when few */
   const rowCount = Math.ceil(candidates.length / 3) || 1;
-  g.style.gridTemplateRows = `repeat(${rowCount}, 1fr)`;
+  const gridH    = document.getElementById('grid').clientHeight;
+  const gapTotal = (rowCount - 1) * 8;
+  const naturalH = Math.floor((gridH - gapTotal) / rowCount);
+  const MAX_ROW  = 120; // px — cap so cards don't go huge with few candidates
+  if (naturalH > MAX_ROW) {
+    g.style.gridTemplateRows = `repeat(${rowCount}, ${MAX_ROW}px)`;
+    g.style.alignContent = 'start';
+  } else {
+    g.style.gridTemplateRows = `repeat(${rowCount}, 1fr)`;
+    g.style.alignContent = 'stretch';
+  }
 
   /* cards */
   g.innerHTML=candidates.map((c,i)=>{
