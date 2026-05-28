@@ -25,11 +25,9 @@
     }
 
     html, body {
-      height: 100%;
-      overflow: hidden;
+      height: 100%; overflow: hidden;
       font-family: 'Inter', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      background: var(--bg); color: var(--text);
     }
 
     #bgc { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
@@ -44,62 +42,55 @@
       padding: 12px 16px 0;
     }
 
-    /* ════════════════════════════════
-       HEADER  (28vh — 30% of screen)
-    ════════════════════════════════ */
+    /* ══════════════════════════════════════
+       HEADER  (28vh) — logos centred, title below
+    ══════════════════════════════════════ */
     #hdr {
+      position: relative;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 22px;
-      padding: 18px 28px;
+      justify-content: center;
+      gap: 14px;
+      padding: 16px 120px; /* side padding leaves room for LIVE pill */
       background: #fff;
       border-radius: var(--r);
       box-shadow: 0 4px 28px rgba(0,0,0,.35);
     }
 
-    .logos { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
-    .lw img {
-      height: 76px;
-      width: auto;
-      max-width: 160px;
-      object-fit: contain;
-      display: block;
-    }
-    .lw .lf {
-      display: none;
-      font-size: .9rem; font-weight: 800; color: #1e293b;
-      max-width: 110px; text-align: center; line-height: 1.3;
-    }
-    .vsep { width: 2px; height: 60px; background: #e2e8f0; flex-shrink: 0; }
+    /* logos row — centred */
+    .logos { display: flex; align-items: center; gap: 20px; }
+    .lw img { height: 68px; width: auto; max-width: 150px; object-fit: contain; display: block; }
+    .lw .lf { display: none; font-size: .88rem; font-weight: 800; color: #1e293b; max-width: 110px; text-align: center; line-height: 1.3; }
+    .vsep { width: 2px; height: 56px; background: #e2e8f0; flex-shrink: 0; }
 
-    .title-col { flex: 1; text-align: center; }
-    .title-col h1 {
-      font-size: clamp(1.7rem, 3.2vw, 3rem);
+    /* title below logos */
+    .hdr-title {
+      font-size: clamp(1.2rem, 2.6vw, 2.4rem);
       font-weight: 900;
-      letter-spacing: -.5px;
+      letter-spacing: -.3px;
+      text-align: center;
       background: linear-gradient(110deg, #000 15%, var(--purple) 55%, var(--blue) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      line-height: 1.1;
-    }
-    .title-col .sub {
-      font-size: clamp(.85rem, 1.3vw, 1.15rem);
-      color: #475569; font-weight: 600; margin-top: 7px;
+      line-height: 1.2;
     }
 
-    .hdr-r { display: flex; flex-direction: column; align-items: flex-end; gap: 9px; flex-shrink: 0; }
+    /* LIVE + date — absolute top-right */
+    .hdr-r {
+      position: absolute; top: 16px; right: 20px;
+      display: flex; flex-direction: column; align-items: flex-end; gap: 7px;
+    }
     .live-pill {
       display: flex; align-items: center; gap: 8px;
-      padding: 7px 16px;
-      border-radius: 100px;
-      background: rgba(239,68,68,.1);
-      border: 1.5px solid rgba(239,68,68,.4);
+      padding: 6px 14px; border-radius: 100px;
+      background: rgba(239,68,68,.1); border: 1.5px solid rgba(239,68,68,.4);
     }
     .ldot { width: 9px; height: 9px; border-radius: 50%; background: var(--red); animation: blink 1.6s ease-in-out infinite; }
     @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.2;transform:scale(.6)} }
-    .live-pill span { font-size: .78rem; font-weight: 800; letter-spacing: 2px; color: var(--red); text-transform: uppercase; }
-    #date-txt { font-size: .95rem; color: #334155; font-weight: 700; }
+    .live-pill span { font-size: .76rem; font-weight: 800; letter-spacing: 2px; color: var(--red); text-transform: uppercase; }
+    #date-txt { font-size: .88rem; color: #334155; font-weight: 700; }
 
     /* ════════════════════════════════
        STATS BAR  (7vh)
@@ -108,10 +99,8 @@
     .stat {
       flex: 1; display: flex; align-items: center; gap: 10px;
       padding: 8px 14px;
-      background: var(--glass);
-      border: 1px solid var(--gborder);
-      border-radius: 12px;
-      backdrop-filter: blur(10px);
+      background: var(--glass); border: 1px solid var(--gborder);
+      border-radius: 12px; backdrop-filter: blur(10px);
     }
     .se { font-size: 1.2rem; }
     .sl { font-size: .6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
@@ -119,36 +108,31 @@
     .stat.st-sel { border-color: rgba(16,185,129,.3); }  .stat.st-sel .sv { color: #34d399; }
     .stat.st-ip  { border-color: rgba(245,158,11,.3); }  .stat.st-ip  .sv { color: #fbbf24; }
     .stat.st-ir  { border-color: rgba(59,130,246,.3); }  .stat.st-ir  .sv { color: #60a5fa; }
-    .stat.st-nsel{ border-color: rgba(239,68,68,.3);  }  .stat.st-nsel.sv{ color: #f87171; }
+    .stat.st-nsel{ border-color: rgba(239,68,68,.3);  }  .stat.st-nsel .sv{ color: #f87171; }
 
     /* ════════════════════════════════
        CANDIDATE GRID  (1fr ≈ 50vh)
     ════════════════════════════════ */
     #grid { overflow: hidden; position: relative; }
-
     #grid-inner {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
       height: 100%;
-      /* gridTemplateRows set by JS based on candidate count */
     }
 
     .lstate { grid-column:1/-1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:60px; }
     .spin { width:36px; height:36px; border:3px solid rgba(168,85,247,.18); border-top-color:var(--purple); border-radius:50%; animation:rot .8s linear infinite; }
     @keyframes rot { to{transform:rotate(360deg)} }
     .lstate p { color:var(--muted); font-size:.9rem; }
-
     .errst { grid-column:1/-1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:11px; padding:60px; text-align:center; }
     .errst h3 { color:var(--red); font-size:1.05rem; }
     .errst p  { color:var(--muted); font-size:.82rem; max-width:420px; line-height:1.6; }
-    .errst code { background:rgba(255,255,255,.08); padding:1px 6px; border-radius:4px; font-family:monospace; }
 
     /* ── candidate card ── */
     .card {
       position: relative;
-      background: var(--glass);
-      border: 1px solid var(--gborder);
+      background: var(--glass); border: 1px solid var(--gborder);
       border-radius: var(--r);
       padding: clamp(6px,1.2vh,13px) clamp(8px,1vw,13px);
       display: flex; flex-direction: column; justify-content: space-between;
@@ -164,20 +148,17 @@
     }
     @keyframes cin { to{opacity:1;transform:translateY(0)} }
 
-    /* top row: number + optional trophy */
     .card-top { display:flex; align-items:center; justify-content:space-between; }
     .cn  { font-size:clamp(0.48rem,1.1vh,0.68rem); color:var(--muted); font-weight:500; line-height:1; }
     .trophy { font-size:clamp(0.7rem,1.3vh,1.1rem); animation:tB 2s ease-in-out infinite; flex-shrink:0; }
     @keyframes tB { 0%,100%{transform:rotate(-5deg)} 50%{transform:translateY(-2px) rotate(5deg)} }
 
-    /* bottom row: name left, badge right */
     .card-bot { display:flex; align-items:center; justify-content:space-between; gap:8px; min-width:0; }
     .cnm { font-size:clamp(0.6rem,1.8vh,1.05rem); font-weight:700; line-height:1.2; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 
     .badge {
       display:inline-flex; align-items:center; gap:4px; flex-shrink:0;
-      padding:clamp(2px,0.5vh,5px) clamp(5px,0.7vh,10px);
-      border-radius:100px;
+      padding:clamp(2px,0.5vh,5px) clamp(5px,0.7vh,10px); border-radius:100px;
       font-size:clamp(0.42rem,0.95vh,0.63rem); font-weight:700;
       text-transform:uppercase; letter-spacing:.5px;
     }
@@ -187,20 +168,16 @@
     .sns { --tc:#6b7280; }
     .sns .badge { background:rgba(107,114,128,.14); border:1px solid rgba(107,114,128,.32); color:#9ca3af; }
     .sns .bd    { background:#6b7280; }
-
     .sip { --tc:#f59e0b; border-color:rgba(245,158,11,.28)!important; box-shadow:0 0 18px rgba(245,158,11,.07); }
     .sip .badge { background:rgba(245,158,11,.14); border:1px solid rgba(245,158,11,.45); color:#fbbf24; animation:gbadge 2s ease-in-out infinite; }
     .sip .bd    { background:#f59e0b; animation:dp 1.5s ease-in-out infinite; }
-
     .sir { --tc:#3b82f6; border-color:rgba(59,130,246,.28)!important; box-shadow:0 0 18px rgba(59,130,246,.07); }
     .sir .badge { background:rgba(59,130,246,.14); border:1px solid rgba(59,130,246,.45); color:#60a5fa; animation:gbadge 2.5s ease-in-out infinite; }
     .sir .bd    { background:#3b82f6; animation:dp 2s ease-in-out infinite; }
-
     .ssel { --tc:#10b981; border-color:rgba(16,185,129,.42)!important; background:rgba(16,185,129,.07)!important; box-shadow:0 0 30px rgba(16,185,129,.22),inset 0 0 20px rgba(16,185,129,.05); }
     .ssel .badge { background:rgba(16,185,129,.2); border:1px solid rgba(16,185,129,.6); color:#34d399; animation:sg 2s ease-in-out infinite; }
     .ssel .bd    { background:#10b981; animation:dp 1s ease-in-out infinite; }
     .ssel .cnm   { color:#a7f3d0; }
-
     .snsl { --tc:#ef4444; border-color:rgba(239,68,68,.18)!important; }
     .snsl .badge { background:rgba(239,68,68,.12); border:1px solid rgba(239,68,68,.32); color:#f87171; }
     .snsl .bd    { background:#ef4444; }
@@ -209,17 +186,13 @@
     @keyframes dp     { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.7);opacity:.5} }
     @keyframes sg     { 0%,100%{box-shadow:0 0 6px rgba(16,185,129,.5)} 50%{box-shadow:0 0 20px rgba(16,185,129,.95)} }
 
-    /* ── CARD CONGRATULATIONS OVERLAY ── */
+    /* ── card congratulations overlay ── */
     .cong-ov {
       position: absolute; inset: 0;
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
       background: linear-gradient(135deg, #052e16, #064e3b, #065f46);
-      border-radius: var(--r);
-      opacity: 0;
-      transition: opacity .4s ease;
-      z-index: 5;
-      text-align: center; padding: 10px;
-      pointer-events: none;
+      border-radius: var(--r); opacity: 0; transition: opacity .4s ease;
+      z-index: 5; text-align: center; padding: 10px; pointer-events: none;
     }
     .card.cong-active .cong-ov { opacity: 1; }
     .cong-ov .co-em  { font-size: 1.7rem; animation: bigB 1s ease-in-out infinite; }
@@ -230,18 +203,14 @@
     /* ════════════════════════════════
        TICKER  (10vh)
     ════════════════════════════════ */
-    #tkwrap {
-      background: rgba(168,85,247,.08);
-      border-top: 1px solid rgba(168,85,247,.25);
-      overflow: hidden; display: flex; align-items: center;
-    }
+    #tkwrap { background:rgba(168,85,247,.08); border-top:1px solid rgba(168,85,247,.25); overflow:hidden; display:flex; align-items:center; }
     #tktrack { display:flex; white-space:nowrap; animation:scroll 40s linear infinite; }
     .ti { display:inline-flex; align-items:center; gap:10px; padding:0 40px; font-size:1.05rem; font-weight:600; color:#c4b5fd; }
     .tsep { color:var(--purple); font-size:1rem; }
     @keyframes scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
     /* ════════════════════════════════
-       TV SLIDE OVERLAYS
+       TV SLIDES
     ════════════════════════════════ */
     .slide {
       position: fixed; inset: 0; z-index: 60;
@@ -251,105 +220,55 @@
     }
     .slide.active { opacity: 1; pointer-events: all; }
 
-    /* ── SLIDE 1: Champions ── */
-    #sl-champs { background: linear-gradient(140deg,#011f13 0%,#022c22 40%,#064e3b 100%); }
-    .sl-title-champs {
-      font-size: clamp(1.8rem,4vw,3.4rem);
-      font-weight: 900; color: #fff; text-align: center;
-      margin-bottom: 44px;
-      animation: tPulse 2s ease-in-out infinite;
-      text-shadow: 0 0 40px rgba(16,185,129,.7);
-    }
-    @keyframes tPulse { 0%,100%{text-shadow:0 0 30px rgba(16,185,129,.5)} 50%{text-shadow:0 0 70px rgba(16,185,129,1),0 0 120px rgba(16,185,129,.4)} }
-    .champs-grid { display:flex; flex-wrap:wrap; gap:22px; justify-content:center; max-width:88vw; }
-    .champ-card {
-      background: rgba(16,185,129,.12);
-      border: 2px solid rgba(16,185,129,.55);
-      border-radius: 22px; padding: 26px 42px;
-      text-align: center;
-      box-shadow: 0 0 48px rgba(16,185,129,.25);
-      animation: cPop .6s ease-out forwards;
-      opacity: 0; transform: scale(.8);
-    }
-    @keyframes cPop { to{opacity:1;transform:scale(1)} }
-    .champ-emoji { font-size: 2.2rem; }
-    .champ-name  { font-size: clamp(1.5rem,2.8vw,2.4rem); font-weight:900; color:#6ee7b7; margin-top:8px; }
-    .champ-lbl   { font-size: 1rem; font-weight:700; color:#34d399; margin-top:6px; }
-    .no-champs   { font-size:1.3rem; color:rgba(255,255,255,.45); }
+    /* ── SLIDE 1: Single candidate congratulations ── */
+    #sl-champs { background: linear-gradient(140deg, #011f13 0%, #022c22 40%, #064e3b 100%); }
 
-    /* ── SLIDE 2: Stats ── */
-    #sl-stats { background: linear-gradient(140deg,#0c0f2e 0%,#0f172a 100%); }
-    .sl-title-stats {
-      font-size: clamp(1.5rem,3vw,2.8rem);
-      font-weight: 900; margin-bottom: 50px;
-      background: linear-gradient(110deg,#fff,var(--purple));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .stats-big { display:flex; gap:22px; flex-wrap:wrap; justify-content:center; }
-    .sbn {
-      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
-      border-radius: 20px; padding: 32px 44px; text-align:center; min-width:160px;
-    }
-    .sbn-v { font-size:clamp(3rem,6vw,5.2rem); font-weight:900; line-height:1; }
-    .sbn-l { font-size:.88rem; font-weight:600; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin-top:8px; }
-    .sbn.c-sel { border-color:rgba(16,185,129,.4); }  .sbn.c-sel .sbn-v { color:#34d399; }
-    .sbn.c-ip  { border-color:rgba(245,158,11,.4); }  .sbn.c-ip  .sbn-v { color:#fbbf24; }
-    .sbn.c-ir  { border-color:rgba(59,130,246,.4); }  .sbn.c-ir  .sbn-v { color:#60a5fa; }
-    .sbn.c-ns  { border-color:rgba(239,68,68,.4);  }  .sbn.c-ns  .sbn-v { color:#f87171; }
-    .prog-sec  { margin-top:44px; width:60vw; }
-    .prog-lbl  { font-size:.88rem; color:var(--muted); font-weight:600; margin-bottom:8px; display:flex; justify-content:space-between; }
-    .prog-bar  { height:14px; background:rgba(255,255,255,.07); border-radius:100px; overflow:hidden; }
-    .prog-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,#059669,#34d399); transition:width 1.2s ease; }
-
-    /* ── SLIDE 3: VVISM Ad ── */
-    #sl-vvism {
-      background: linear-gradient(140deg, #0f0c29 0%, #1a1060 50%, #24243e 100%);
-    }
-    .vv-wrap {
+    .sc-wrap {
       display: flex; flex-direction: column; align-items: center;
-      gap: 22px; max-width: 92vw; text-align: center;
+      gap: 28px; text-align: center; max-width: 85vw;
     }
-    .vv-badge {
-      background: rgba(168,85,247,.18); border: 1px solid rgba(168,85,247,.5);
-      border-radius: 100px; padding: 7px 22px;
-      font-size: .82rem; font-weight: 700; color: #d8b4fe; letter-spacing: 1px;
+    .sc-emojis { font-size: clamp(2rem,4vw,3.2rem); letter-spacing: 10px; animation: floatE 3s ease-in-out infinite; }
+    @keyframes floatE { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+    .sc-title {
+      font-size: clamp(2rem,5vw,4rem);
+      font-weight: 900; color: #fff; line-height: 1;
+      animation: tPulse 2s ease-in-out infinite;
+      text-shadow: 0 0 50px rgba(16,185,129,.7);
+    }
+    @keyframes tPulse { 0%,100%{text-shadow:0 0 30px rgba(16,185,129,.5)} 50%{text-shadow:0 0 80px rgba(16,185,129,1),0 0 130px rgba(16,185,129,.4)} }
+
+    .sc-latest-label {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 100px;
+      padding: 8px 24px;
+      font-size: clamp(.8rem,1.5vw,1.1rem);
+      font-weight: 700;
+      color: rgba(255,255,255,.75);
+      letter-spacing: 1px;
       text-transform: uppercase;
     }
-    .vv-logo-row { display: flex; align-items: center; justify-content: center; gap: 16px; }
-    .vv-lw {
-      background: #fff; border-radius: 12px;
-      padding: 10px 18px;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,.35);
+
+    .sc-name {
+      font-size: clamp(3.5rem,10vw,8rem);
+      font-weight: 900; color: #6ee7b7; line-height: 1;
+      text-shadow: 0 0 60px rgba(16,185,129,.5);
+      animation: nameScale 1.8s ease-in-out infinite;
     }
-    .vv-lw img { height: 58px; width: auto; max-width: 140px; object-fit: contain; display: block; }
-    .vv-lf { display: none; font-size: .8rem; font-weight: 800; color: #1e293b; max-width: 100px; text-align: center; }
-    .vv-lsep { width: 1px; height: 52px; background: rgba(255,255,255,.15); flex-shrink: 0; }
-    .vv-heading {
-      font-size: clamp(1.8rem, 3.5vw, 3.2rem); font-weight: 900;
-      background: linear-gradient(110deg, #fff 20%, #c084fc 60%, #818cf8 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      line-height: 1.1;
+    @keyframes nameScale { 0%,100%{transform:scale(1)} 50%{transform:scale(1.03)} }
+
+    .sc-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(16,185,129,.18); border: 2px solid rgba(16,185,129,.6);
+      border-radius: 100px; padding: 12px 36px;
+      font-size: clamp(.9rem,2vw,1.5rem); font-weight: 800; color: #34d399;
+      animation: sg 2s ease-in-out infinite;
     }
-    .vv-sub { font-size: clamp(.85rem, 1.3vw, 1.1rem); color: #94a3b8; line-height: 1.7; }
-    .vv-stats { display: flex; align-items: center; gap: 0; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; overflow: hidden; }
-    .vv-stat { padding: 20px 36px; text-align: center; }
-    .vv-snum { font-size: clamp(1.6rem, 3vw, 2.6rem); font-weight: 900; color: #c084fc; }
-    .vv-slbl { font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-top: 4px; }
-    .vv-sdiv { width: 1px; height: 60px; background: rgba(255,255,255,.1); flex-shrink: 0; }
-    .vv-tracks { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-    .vv-track {
-      background: rgba(129,140,248,.12); border: 1px solid rgba(129,140,248,.35);
-      border-radius: 100px; padding: 7px 18px;
-      font-size: .82rem; font-weight: 600; color: #a5b4fc;
-    }
-    .vv-contact { font-size: .82rem; color: #64748b; font-weight: 500; }
+    .sc-sub { font-size: clamp(.75rem,1.2vw,1rem); color: rgba(255,255,255,.4); font-weight: 500; }
 
     /* ── slide nav dots ── */
-    #sdots {
-      position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
-      display: flex; gap: 8px; z-index: 70;
-    }
+    #sdots { position:fixed; bottom:14px; left:50%; transform:translateX(-50%); display:flex; gap:8px; z-index:70; }
     .sdot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.22); transition:all .35s; }
     .sdot.on { background:var(--purple); width:26px; border-radius:4px; }
 
@@ -358,8 +277,7 @@
     ════════════════════════════════ */
     #rpill {
       position:fixed; bottom:52px; right:16px;
-      display:flex; align-items:center; gap:7px;
-      padding:5px 13px;
+      display:flex; align-items:center; gap:7px; padding:5px 13px;
       background:rgba(0,0,0,.55); border:1px solid rgba(255,255,255,.08);
       border-radius:100px; font-size:.7rem; color:var(--muted);
       backdrop-filter:blur(12px); z-index:80;
@@ -376,6 +294,7 @@
 
   <!-- ── HEADER (30%) ── -->
   <header id="hdr">
+    <!-- logos — centred -->
     <div class="logos">
       <div class="lw"><img src="logos/vvism.png" alt="VVISM"
         onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
@@ -394,11 +313,10 @@
         <div class="lf">Accenture</div></div>
     </div>
 
-    <div class="title-col">
-      <h1>Accenture BS Program</h1>
-      <div class="sub">Interview Results &mdash; Live Dashboard</div>
-    </div>
+    <!-- title below logos -->
+    <div class="hdr-title">BS Computer Science Program &mdash; Interview Results</div>
 
+    <!-- live pill + date — absolute top-right -->
     <div class="hdr-r">
       <div class="live-pill"><div class="ldot"></div><span>Live</span></div>
       <div id="date-txt"></div>
@@ -407,21 +325,11 @@
 
   <!-- ── STATS (7vh) ── -->
   <div id="stats">
-    <div class="stat">
-      <div class="se">👥</div><div><div class="sl">Total</div><div class="sv" id="sv-tot">—</div></div>
-    </div>
-    <div class="stat st-sel">
-      <div class="se">✅</div><div><div class="sl">Selected</div><div class="sv" id="sv-sel">—</div></div>
-    </div>
-    <div class="stat st-ip">
-      <div class="se">⏳</div><div><div class="sl">In Progress</div><div class="sv" id="sv-ip">—</div></div>
-    </div>
-    <div class="stat st-ir">
-      <div class="se">🔍</div><div><div class="sl">In Review</div><div class="sv" id="sv-ir">—</div></div>
-    </div>
-    <div class="stat st-nsel">
-      <div class="se">❌</div><div><div class="sl">Not Selected</div><div class="sv" id="sv-nsel">—</div></div>
-    </div>
+    <div class="stat"><div class="se">👥</div><div><div class="sl">Total</div><div class="sv" id="sv-tot">—</div></div></div>
+    <div class="stat st-sel"><div class="se">✅</div><div><div class="sl">Selected</div><div class="sv" id="sv-sel">—</div></div></div>
+    <div class="stat st-ip"><div class="se">⏳</div><div><div class="sl">In Progress</div><div class="sv" id="sv-ip">—</div></div></div>
+    <div class="stat st-ir"><div class="se">🔍</div><div><div class="sl">In Review</div><div class="sv" id="sv-ir">—</div></div></div>
+    <div class="stat st-nsel"><div class="se">❌</div><div><div class="sl">Not Selected</div><div class="sv" id="sv-nsel">—</div></div></div>
   </div>
 
   <!-- ── GRID (50vh) ── -->
@@ -436,70 +344,22 @@
 
 </div>
 
-<!-- TV SLIDE: Champions -->
+<!-- TV SLIDE: Latest selected candidate congratulations -->
 <div class="slide" id="sl-champs">
-  <div class="sl-title-champs">🎉 Congratulations — Selected Candidates! 🎉</div>
-  <div class="champs-grid" id="champs-grid"></div>
-</div>
-
-<!-- TV SLIDE: Stats -->
-<div class="slide" id="sl-stats">
-  <div class="sl-title-stats">📊 Live Interview Statistics</div>
-  <div class="stats-big">
-    <div class="sbn"><div class="sbn-v" id="sbn-tot">—</div><div class="sbn-l">Total Candidates</div></div>
-    <div class="sbn c-sel"><div class="sbn-v" id="sbn-sel">—</div><div class="sbn-l">Selected</div></div>
-    <div class="sbn c-ip"><div class="sbn-v" id="sbn-ip">—</div><div class="sbn-l">In Progress</div></div>
-    <div class="sbn c-ir"><div class="sbn-v" id="sbn-ir">—</div><div class="sbn-l">In Review</div></div>
-    <div class="sbn c-ns"><div class="sbn-v" id="sbn-ns">—</div><div class="sbn-l">Not Selected</div></div>
-  </div>
-  <div class="prog-sec">
-    <div class="prog-lbl"><span>Selection Rate</span><span id="prog-pct">0%</span></div>
-    <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+  <div class="sc-wrap">
+    <div class="sc-emojis">🎊 🎉 🏆 🎉 🎊</div>
+    <div class="sc-title">Congratulations!</div>
+    <div class="sc-latest-label">🎯 Latest Selected Candidate</div>
+    <div class="sc-name" id="sc-name">—</div>
+    <div class="sc-badge">✓ &nbsp; Selected for Accenture BS Program</div>
+    <div class="sc-sub">Vishwa Vishwani Institute &nbsp;×&nbsp; TalentSprint &nbsp;×&nbsp; Accenture</div>
   </div>
 </div>
 
-<!-- TV SLIDE: VVISM Ad -->
-<div class="slide" id="sl-vvism">
-  <div class="vv-wrap">
-    <div class="vv-badge">NAAC A+ &nbsp;|&nbsp; UGC Approved &nbsp;|&nbsp; 28 Years of Excellence</div>
-    <div class="vv-logo-row">
-      <div class="vv-lw"><img src="logos/vvism.png" alt="VVISM" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="vv-lf">VVISM</span></div>
-      <div class="vv-lsep"></div>
-      <div class="vv-lw"><img src="logos/osmania.png" alt="Osmania University" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="vv-lf">Osmania University</span></div>
-      <div class="vv-lsep"></div>
-      <div class="vv-lw"><img src="logos/talentsprint.png" alt="TalentSprint" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="vv-lf">TalentSprint</span></div>
-      <div class="vv-lsep"></div>
-      <div class="vv-lw"><img src="logos/accenture.png" alt="Accenture" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="vv-lf">Accenture</span></div>
-    </div>
-    <h2 class="vv-heading">BS in Computer Science</h2>
-    <p class="vv-sub">A next-generation degree that blends academic excellence<br>with real-world industry experience</p>
-    <div class="vv-stats">
-      <div class="vv-stat"><div class="vv-snum">30,000+</div><div class="vv-slbl">Students Placed</div></div>
-      <div class="vv-sdiv"></div>
-      <div class="vv-stat"><div class="vv-snum">₹23 LPA</div><div class="vv-slbl">Top Salary</div></div>
-      <div class="vv-sdiv"></div>
-      <div class="vv-stat"><div class="vv-snum">4.9 / 5</div><div class="vv-slbl">Student Rating</div></div>
-      <div class="vv-sdiv"></div>
-      <div class="vv-stat"><div class="vv-snum">4.2 LPA</div><div class="vv-slbl">Average Salary</div></div>
-    </div>
-    <div class="vv-tracks">
-      <span class="vv-track">🤖 AI &amp; Machine Learning</span>
-      <span class="vv-track">🔒 Cyber Security</span>
-      <span class="vv-track">💻 Full Stack Dev</span>
-      <span class="vv-track">📊 Data Science</span>
-      <span class="vv-track">☁️ Cloud Computing</span>
-      <span class="vv-track">🎨 UI/UX Design</span>
-    </div>
-    <div class="vv-contact">📞 +91 6309 072174 &nbsp;&nbsp; ✉️ admissions@vishwavishwani.com &nbsp;&nbsp; 📍 Hyderabad, Telangana</div>
-  </div>
-</div>
-
-<!-- Slide dots -->
+<!-- Slide dots (2 slides) -->
 <div id="sdots">
   <div class="sdot on" id="dot-0"></div>
   <div class="sdot"    id="dot-1"></div>
-  <div class="sdot"    id="dot-2"></div>
-  <div class="sdot"    id="dot-3"></div>
 </div>
 
 <!-- Refresh pill -->
@@ -521,9 +381,7 @@ const CFG = {
     'Best wishes to all candidates!',
     'Congratulations to all who are Selected!',
   ],
-  /* Slide durations in ms: [main-results, champions, stats, vvism-ad] */
-  SLIDE_MS: [15000, 12000, 10000, 13000],
-  /* Card congratulations duration */
+  SLIDE_MS:    [15000, 12000], // [results, congrats]
   CONGRATS_MS: 10000,
 };
 
@@ -575,8 +433,8 @@ function boom(x=.5,y=.4){
   f(x-.3,y,50);f(x+.3,y,50);setTimeout(()=>f(x,y,90),300);
 }
 
-/* ══ CARD-SPECIFIC CONGRATULATIONS ══ */
-const congrats=new Map(); // name → timer
+/* ══ CARD CONGRATULATIONS ══ */
+const congrats=new Map();
 
 function triggerCardCongrats(name){
   if(congrats.has(name)) return;
@@ -596,43 +454,41 @@ function applyOverlays(){
 let slideIdx=0, slideTimer=null;
 let allCandidates=[];
 
+/*
+  lastSelectedName — always holds the most recently selected candidate.
+  When multiple candidates are selected in the same refresh cycle,
+  the one that appears LAST in the sheet order wins (most recent entry).
+  This gives predictable, fair behaviour.
+*/
+let lastSelectedName = null;
+
+let champsConfettiTimer = null;
+
 function showSlide(idx){
+  // If slide 1 requested but nobody selected yet, stay on slide 0
+  if(idx === 1 && !lastSelectedName){
+    slideIdx = 0;
+    clearTimeout(slideTimer);
+    slideTimer = setTimeout(()=>showSlide(1), CFG.SLIDE_MS[0]);
+    return;
+  }
+
   document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.sdot').forEach((d,i)=>d.classList.toggle('on',i===idx));
-  slideIdx=idx;
-  if(idx===1){ buildChampsSlide(); document.getElementById('sl-champs').classList.add('active'); }
-  else if(idx===2){ buildStatsSlide(); document.getElementById('sl-stats').classList.add('active'); }
-  else if(idx===3){ document.getElementById('sl-vvism').classList.add('active'); }
-  clearTimeout(slideTimer);
-  slideTimer=setTimeout(()=>showSlide((idx+1)%4), CFG.SLIDE_MS[idx]);
-}
+  slideIdx = idx;
 
-function buildChampsSlide(){
-  const sel=allCandidates.filter(c=>norm(c.status)==='selected');
-  const g=document.getElementById('champs-grid');
-  if(!sel.length){
-    g.innerHTML=`<div class="no-champs">Interviews in progress — results coming soon!</div>`;
-  } else {
-    g.innerHTML=sel.map((c,i)=>`
-      <div class="champ-card" style="animation-delay:${i*110}ms">
-        <div class="champ-emoji">🏆</div>
-        <div class="champ-name">${esc(c.name)}</div>
-        <div class="champ-lbl">✓ &nbsp;Selected</div>
-      </div>`).join('');
+  clearInterval(champsConfettiTimer);
+
+  if(idx === 1){
+    document.getElementById('sc-name').textContent = lastSelectedName;
+    document.getElementById('sl-champs').classList.add('active');
+    // fire confetti periodically while slide is visible
+    boom();
+    champsConfettiTimer = setInterval(boom, 3500);
   }
-}
 
-function buildStatsSlide(){
-  const cnt=v=>allCandidates.filter(c=>norm(c.status)===v).length;
-  const tot=allCandidates.length, sel=cnt('selected');
-  document.getElementById('sbn-tot').textContent=tot;
-  document.getElementById('sbn-sel').textContent=sel;
-  document.getElementById('sbn-ip').textContent=cnt('in progress');
-  document.getElementById('sbn-ir').textContent=cnt('in review');
-  document.getElementById('sbn-ns').textContent=cnt('not selected');
-  const pct=tot>0?Math.round(sel/tot*100):0;
-  document.getElementById('prog-pct').textContent=pct+'%';
-  setTimeout(()=>{document.getElementById('prog-fill').style.width=pct+'%';},120);
+  clearTimeout(slideTimer);
+  slideTimer = setTimeout(()=>showSlide((idx+1)%2), CFG.SLIDE_MS[idx]);
 }
 
 /* ══ FETCH ══ */
@@ -659,31 +515,44 @@ function render(candidates){
   const g=document.getElementById('grid-inner');
   const cnt=v=>candidates.filter(c=>norm(c.status)===v).length;
 
-  /* detect newly selected → card congrats */
+  /* detect newly selected candidates */
   if(!firstLoad){
-    candidates.forEach(c=>{
-      if(norm(c.status)!=='selected') return;
+    // Collect all newly-selected in sheet order
+    const newSel = candidates.filter(c=>{
+      if(norm(c.status)!=='selected') return false;
       const p=prev.find(x=>x.name===c.name);
-      if(!p||norm(p.status)!=='selected') triggerCardCongrats(c.name);
+      return !p || norm(p.status)!=='selected';
     });
-  } else if(cnt('selected')>0){
-    setTimeout(boom,900);
+
+    if(newSel.length > 0){
+      // Last in sheet order = most recently added → wins when simultaneous
+      lastSelectedName = newSel[newSel.length - 1].name;
+      // Trigger card overlay for ALL newly selected
+      newSel.forEach(c=>triggerCardCongrats(c.name));
+    }
+  } else {
+    // On first load: if anyone is already selected, remember the last one
+    const sel = candidates.filter(c=>norm(c.status)==='selected');
+    if(sel.length > 0){
+      lastSelectedName = sel[sel.length - 1].name;
+      setTimeout(boom, 900);
+    }
   }
 
   /* stats bar */
-  document.getElementById('sv-tot').textContent =candidates.length;
-  document.getElementById('sv-sel').textContent =cnt('selected');
-  document.getElementById('sv-ip').textContent  =cnt('in progress');
-  document.getElementById('sv-ir').textContent  =cnt('in review');
-  document.getElementById('sv-nsel').textContent=cnt('not selected');
+  document.getElementById('sv-tot').textContent  = candidates.length;
+  document.getElementById('sv-sel').textContent  = cnt('selected');
+  document.getElementById('sv-ip').textContent   = cnt('in progress');
+  document.getElementById('sv-ir').textContent   = cnt('in review');
+  document.getElementById('sv-nsel').textContent = cnt('not selected');
 
-  /* smart row sizing: fill height when many candidates, cap when few */
+  /* smart row sizing */
   const rowCount = Math.ceil(candidates.length / 3) || 1;
   const gridH    = document.getElementById('grid').clientHeight;
   const gapTotal = (rowCount - 1) * 8;
   const naturalH = Math.floor((gridH - gapTotal) / rowCount);
-  const MAX_ROW  = 120; // px — cap so cards don't go huge with few candidates
-  if (naturalH > MAX_ROW) {
+  const MAX_ROW  = 120;
+  if(naturalH > MAX_ROW){
     g.style.gridTemplateRows = `repeat(${rowCount}, ${MAX_ROW}px)`;
     g.style.alignContent = 'start';
   } else {
@@ -714,27 +583,25 @@ function render(candidates){
 
   applyOverlays();
 
-  /* update active slide content */
-  if(slideIdx===1) buildChampsSlide();
-  if(slideIdx===2) buildStatsSlide();
+  /* keep congrats slide name fresh if currently visible */
+  if(slideIdx===1 && lastSelectedName){
+    document.getElementById('sc-name').textContent = lastSelectedName;
+  }
 
-  allCandidates=candidates;
-  prev=candidates;
-  firstLoad=false;
+  allCandidates = candidates;
+  prev = candidates;
+  firstLoad = false;
 }
 
 function renderError(msg){
-  document.getElementById('grid-inner').style.animation='none';
-  document.getElementById('grid-inner').innerHTML=`
-    <div class="errst">
-      <h3>⚠️ Could not load data</h3>
-      <p>${esc(msg||'Unknown error')}<br><br>Make sure the sheet is public: <strong>Share → Anyone with link → Viewer</strong></p>
-    </div>`;
+  const g=document.getElementById('grid-inner');
+  g.style.gridTemplateRows='';
+  g.innerHTML=`<div class="errst"><h3>⚠️ Could not load data</h3><p>${esc(msg||'Unknown error')}<br><br>Make sure the sheet is public: <strong>Share → Anyone with link → Viewer</strong></p></div>`;
 }
 
 /* ══ REFRESH LOOP ══ */
 let cdTimer;
-const rSpin=document.getElementById('rspin'),rLabel=document.getElementById('rlabel');
+const rSpin=document.getElementById('rspin'), rLabel=document.getElementById('rlabel');
 
 async function load(){
   clearInterval(cdTimer);
@@ -747,7 +614,7 @@ async function load(){
   cdTimer=setInterval(()=>{cd--;rLabel.textContent=`Refreshing in ${cd}s`;if(cd<=0){clearInterval(cdTimer);load();}},1000);
 }
 
-/* start slide rotation after 8s (let data load first) */
+/* start slide rotation after 8s */
 setTimeout(()=>showSlide(0), 8000);
 
 load();
